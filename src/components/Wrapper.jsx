@@ -4,7 +4,7 @@ import "./../styles/Peli.css";
 
 export default function Wrapper() {
   return (
-    <div>
+    <div className="wrapper">
       <Pelilauta />
     </div>
   );
