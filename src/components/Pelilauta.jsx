@@ -1,22 +1,29 @@
 import React from "react";
+import { useState } from "react";
+import Nolla from "./Nolla";
 
 export default function Pelilauta() {
   const ruudut = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+  const [nollat, setNollat] = useState([]);
+
+  nollat.map((ruutu) => {
+    document.getElementById(ruutu).style.visibility = "visible";
+  });
   return (
     <div className="pelilauta">
       {ruudut.map((i) => {
         return (
-          <div id={i} className="ruutu">
-            <svg height="100px" width="100px">
-              <circle
-                cx="50"
-                cy="60"
-                r="40"
-                stroke="black"
-                fill="white"
-                stroke-width="1"
-              />
-            </svg>
+          <div
+            key={i}
+            id={i}
+            className="ruutu"
+            onClick={() => {
+              if (!nollat.includes(i)) {
+                setNollat(nollat.concat(i));
+              }
+            }}
+          >
+            {nollat.includes(i) ? <Nolla /> : ""}
           </div>
         );
       })}
