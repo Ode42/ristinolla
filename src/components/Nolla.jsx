@@ -5,7 +5,7 @@ export default function Nolla() {
     <svg height="100px" width="100px">
       <circle
         cx="50"
-        cy="60"
+        cy="50"
         r="40"
         stroke="black"
         fill="white"
