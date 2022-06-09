@@ -1,14 +1,33 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Nolla from "./Nolla";
 import Risti from "./Risti";
 
 export default function Pelilauta() {
   const ruudut = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+  const vierekkain = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [6, 4, 2],
+  ];
+
   const [nollat, setNollat] = useState([]);
   const [ristit, setRistit] = useState([]);
   const [vuoro, setVuoro] = useState("ristit");
 
+  useEffect(() => {
+    vierekkain.map((rivi) => {
+      const containsAll = rivi.every((nolla) => {
+        return nollat.includes(nolla);
+      });
+      console.log(containsAll);
+    });
+  });
   nollat.map((ruutu) => {
     document.getElementById(ruutu).style.visibility = "visible";
   });
