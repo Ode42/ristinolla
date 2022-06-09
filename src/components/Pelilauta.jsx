@@ -22,10 +22,19 @@ export default function Pelilauta() {
 
   useEffect(() => {
     vierekkain.map((rivi) => {
-      const containsAll = rivi.every((nolla) => {
-        return nollat.includes(nolla);
-      });
-      console.log(containsAll);
+      if (
+        rivi.every((ruutu) => {
+          return nollat.includes(ruutu);
+        })
+      ) {
+        console.log("Nollat voitti");
+      } else if (
+        rivi.every((ruutu) => {
+          return ristit.includes(ruutu);
+        })
+      ) {
+        console.log("Ristit voitti");
+      }
     });
   });
   nollat.map((ruutu) => {
