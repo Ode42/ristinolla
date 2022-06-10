@@ -19,6 +19,8 @@ export default function Pelilauta() {
   const [nollat, setNollat] = useState([]);
   const [ristit, setRistit] = useState([]);
   const [vuoro, setVuoro] = useState("ristit");
+  const [paattynyt, setPaattynyt] = useState(false);
+  const [voittaja, setVoittaja] = useState("");
 
   useEffect(() => {
     vierekkain.map((rivi) => {
@@ -27,46 +29,54 @@ export default function Pelilauta() {
           return nollat.includes(ruutu);
         })
       ) {
-        console.log("Nollat voitti");
+        setPaattynyt(true);
+        setVoittaja("nollat");
       } else if (
         rivi.every((ruutu) => {
           return ristit.includes(ruutu);
         })
       ) {
-        console.log("Ristit voitti");
+        setPaattynyt(true);
+        setVoittaja("ristit");
       }
     });
   });
-  nollat.map((ruutu) => {
-    document.getElementById(ruutu).style.visibility = "visible";
-  });
-  return (
-    <div className="pelilauta">
-      {ruudut.map((i) => {
-        return (
-          <div
-            key={i}
-            id={i}
-            className="ruutu"
-            onClick={() => {
-              if (vuoro === "nollat") {
-                if (!ristit.includes(i) && !nollat.includes(i)) {
-                  setNollat(nollat.concat(i));
-                  setVuoro("ristit");
+
+  if (paattynyt === false) {
+    return (
+      <div className="pelilauta">
+        {ruudut.map((i) => {
+          return (
+            <div
+              key={i}
+              id={i}
+              className="ruutu"
+              onClick={() => {
+                if (vuoro === "nollat") {
+                  if (!ristit.includes(i) && !nollat.includes(i)) {
+                    setNollat(nollat.concat(i));
+                    setVuoro("ristit");
+                  }
+                } else if (vuoro === "ristit") {
+                  if (!ristit.includes(i) && !nollat.includes(i)) {
+                    setRistit(ristit.concat(i));
+                    setVuoro("nollat");
+                  }
                 }
-              } else if (vuoro === "ristit") {
-                if (!ristit.includes(i) && !nollat.includes(i)) {
-                  setRistit(ristit.concat(i));
-                  setVuoro("nollat");
-                }
-              }
-            }}
-          >
-            {nollat.includes(i) ? <Nolla /> : ""}
-            {ristit.includes(i) ? <Risti /> : ""}
-          </div>
-        );
-      })}
-    </div>
-  );
+              }}
+            >
+              {nollat.includes(i) ? <Nolla /> : ""}
+              {ristit.includes(i) ? <Risti /> : ""}
+            </div>
+          );
+        })}
+      </div>
+    );
+  } else {
+    return (
+      <div className="paattynyt">
+        <h1>Peli päättyi, voittaja on {voittaja}</h1>
+      </div>
+    );
+  }
 }
