@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Nolla from "./Nolla";
 import Risti from "./Risti";
+import { arvoRuutu } from "../utils/tietokone";
 
 export default function Pelilauta() {
   const ruudut = [0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -23,6 +24,14 @@ export default function Pelilauta() {
   const [voittaja, setVoittaja] = useState("");
 
   useEffect(() => {
+    if (vuoro === "nollat") {
+      const ruutu = arvoRuutu(nollat);
+      if (!ristit.includes(ruutu) && !nollat.includes(ruutu)) {
+        setNollat(nollat.concat(ruutu));
+        setVuoro("ristit");
+      }
+    }
+
     vierekkain.map((rivi) => {
       if (
         rivi.every((ruutu) => {
