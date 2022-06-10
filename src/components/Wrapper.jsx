@@ -6,6 +6,9 @@ export default function Wrapper() {
   return (
     <div className="wrapper">
       <Pelilauta />
+      <button className="uusiPeli" onClick={() => window.location.reload()}>
+        Uusi peli
+      </button>
     </div>
   );
 }
