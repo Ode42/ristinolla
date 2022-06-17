@@ -6,6 +6,8 @@ export const tietokonePelaa = (nollat) => {
   return ruutu;
 };
 
-export const arvoRuutu = (eiKelpaavat) => {
-  return Math.floor(Math.random() * 9);
+export const arvoRuutu = (ruudut, eiKelpaavat) => {
+  const kelpaavat = ruudut.filter((ruutu) => !eiKelpaavat.includes(ruutu));
+  const ruutu = kelpaavat[Math.floor(Math.random() * kelpaavat.length)];
+  return ruutu;
 };

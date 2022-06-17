@@ -25,11 +25,9 @@ export default function Pelilauta() {
 
   useEffect(() => {
     if (vuoro === "nollat") {
-      const ruutu = arvoRuutu(nollat);
-      if (!ristit.includes(ruutu) && !nollat.includes(ruutu)) {
-        setNollat(nollat.concat(ruutu));
-        setVuoro("ristit");
-      }
+      const tietokoneenRuutu = arvoRuutu(ruudut, nollat.concat(ristit));
+      setNollat(nollat.concat(tietokoneenRuutu));
+      setVuoro("ristit");
     }
 
     vierekkain.map((rivi) => {
