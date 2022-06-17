@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Nolla from "./Nolla";
 import Risti from "./Risti";
 import { arvoRuutu } from "../utils/tietokone";
+import { odota } from "./../utils/odota";
 
 export default function Pelilauta() {
   const ruudut = [0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -27,6 +28,7 @@ export default function Pelilauta() {
     if (vuoro === "nollat") {
       const tietokoneenRuutu = arvoRuutu(ruudut, nollat.concat(ristit));
       setNollat(nollat.concat(tietokoneenRuutu));
+      odota();
       setVuoro("ristit");
     }
 

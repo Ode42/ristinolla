@@ -2,10 +2,10 @@ export const resolveAfter1Second = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve("resolved");
-    }, 1000);
+    }, 5000);
   });
 };
 
-export async function timeoutCall() {
+export async function odota() {
   const wait = await resolveAfter1Second;
 }
